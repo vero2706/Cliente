@@ -1,0 +1,99 @@
+<!-- Página web con:
+      1. parte de arriba: 6 imagenes ciudades con nombre de cada
+      una debajo (en Vue se almacenara la url)
+      2. al pasar el raton sobre la imagen cambia el borde
+      de azul a verde o al revés
+      3. al pinchar la imagen, aumenta un contador en 1 que hay 
+      en la seccion inferior.
+      3.1 La seccion inf-derecha incluye nombre de cada imagen y 
+      del contador
+      3.2 La seccion inf-izquierda incluirá 6 campos de entrada, uno por cada imagen, 
+      que admitirán un nombre. Cuando se introduzca una cadena y se pulse enter, se 
+      actualizará el nombre del lugar tanto en la zona de contadores como en la de 
+      imágenes.  
+      4. Además, al lado de cada campo de entrada de nombre, se incluirá un campo de 
+      entrada numérico. Cada vez que se incremente este valor se incrementará también el 
+      contador de la zona de contadores.  
+      5. Cuando el contador pase de 15, el borde de la imagen en cuestión se verá punteado y 
+      no sólido. Su comportamiento seguirá siendo el detallado en el apartado b.  
+      6. Por último, habrá una sección final que permitirá cambiar la url de cada la imagen 
+      introduciéndola como texto. Cuando se introduzca una nueva url, el contador 
+      correspondiente volverá a 0. El nombre se mantendrá el mismo, solo se podrá 
+      cambiar en la sección de actualización de nombres.  -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería de lugares a visitar</title>
+  <link rel="stylesheet" href="./styles/estilos.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="./scripts/main.js"></script>
+</head>
+<body>
+  <div id="app">
+    
+    <div class="galeria">
+  <!--1. parte de arriba: 6 imagenes ciudades con nombre de cada
+      una debajo (en Vue se almacenara la url)
+      2. al pasar el raton sobre la imagen cambia el borde
+      de azul a verde o al revés-->
+      <div v-for="(lugar, index) in lugares" :key="index">
+        <img :src="lugar.url" :alt="lugar.nombre"
+          :class="[{ 'borde-verde': lugar.hover, 'borde-punteado': lugar.contador > 15 }]"
+          @mouseover="lugar.hover = !lugar.hover"
+          @mouseout="lugar.hover = !lugar.hover"
+          @click="incrementarContador(index)"/>
+  <!--3. al pinchar la imagen, aumenta un contador en 1 que hay 
+        en la seccion inferior.-->
+
+        <p>{{ lugar.nombre }}</p>
+      </div>
+    </div>
+
+  <!--3.1 La seccion inf-derecha incluye nombre de cada imagen y 
+      del contador
+      3.2 La seccion inf-izquierda incluirá 6 campos de entrada, uno por cada imagen, 
+      que admitirán un nombre. Cuando se introduzca una cadena y se pulse enter, se 
+      actualizará el nombre del lugar tanto en la zona de contadores como en la de 
+      imágenes.  
+      4. Además, al lado de cada campo de entrada de nombre, se incluirá un campo de 
+      entrada numérico. Cada vez que se incremente este valor se incrementará también el 
+      contador de la zona de contadores.  
+      5. Cuando el contador pase de 15, el borde de la imagen en cuestión se verá punteado y 
+      no sólido. Su comportamiento seguirá siendo el detallado en el apartado b.-->
+    <div class="divIntermedio">
+      <div class="entradas">
+        <div v-for="(lugar, index) in lugares" :key="index" class="entrada">
+          <label>Imagen {{index+1}}: </label>
+          <input type="text" v-model="lugar.nuevoNombre" @keyup.enter="actualizarNombre(index)"/>
+          <input type="number" v-model.number="lugar.contadorManual" @change="actualizarContadorManual(index)"/>
+        </div>
+      </div>
+      <div class="contadores">
+        <ul>
+          <li v-for="(lugar, index) in lugares" :key="index"> {{ lugar.nombre }}: {{ lugar.contador }} </li>
+        </ul>
+      </div>
+    </div>
+
+
+  <!--6. Por último, habrá una sección final que permitirá cambiar la url de cada la imagen 
+      introduciéndola como texto. Cuando se introduzca una nueva url, el contador 
+      correspondiente volverá a 0. El nombre se mantendrá el mismo, solo se podrá 
+      cambiar en la sección de actualización de nombres.-->
+    <div class="divUrls">
+      <h3>Cambiar URL de imágenes</h3>
+      <div v-for="(lugar, index) in lugares" :key="'url-' + index" class="entrada">
+        <label>Imagen {{index+1}}: </label>
+        <input type="text" v-model="lugar.nuevaUrl" @keyup.enter="actualizarUrl(index)"/>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    objVue.mount("#app");
+  </script>
+</body>
+</html>

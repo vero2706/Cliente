@@ -1,0 +1,72 @@
+<!--Crea una página web con un formulario. Dicho formulario contendrá el campo input 
+del último ejemplo (sin capturar evento alguno). Además, se completará el formulario: 
+
+. Incorporando tres checkbox para seleccionar franja horaria (6:00 a 14:00, de 
+14:00 a 20:00 y de 20:00 a 01:00), dos radiobutton para indicar si es de 
+prepago o no, una lista desplegable con 5 nombres de compañías de teléfono 
+para seleccionar una y un área de texto para introducir observaciones. El área 
+de texto admitirá, como máximo, 140 caracteres. 
+
+. Añadiendo, a la etiqueta form, los atributos action(sin url) y method.
+
+. Incluyendo, por último, un botón para enviar el formulario. Escoge el tipo de 
+declaración adecuado.-->  
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Selección de Horario y Compañía Telefónica</title>
+</head>
+<body>
+
+    <h1>Formulario de Selección de Horario y Compañía Telefónica</h1>
+    
+    <form action="" method="POST">
+        <!-- Campo de Entrada de Texto -->
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
+        <br><br>
+
+        <!-- Checkboxes de Franja Horaria -->
+        <label>Seleccione su franja horaria:</label><br>
+        <input type="checkbox" id="horario1" name="horario[]" value="6:00 a 14:00">
+        <label for="horario1">6:00 a 14:00</label><br>
+
+        <input type="checkbox" id="horario2" name="horario[]" value="14:00 a 20:00">
+        <label for="horario2">14:00 a 20:00</label><br>
+
+        <input type="checkbox" id="horario3" name="horario[]" value="20:00 a 01:00">
+        <label for="horario3">20:00 a 01:00</label><br><br>
+
+        <!-- Radiobuttons para Prepago o No Prepago -->
+        <label>¿Es prepago?</label><br>
+        <input type="radio" id="prepago_si" name="prepago" value="sí" required>
+        <label for="prepago_si">Sí</label><br>
+
+        <input type="radio" id="prepago_no" name="prepago" value="no">
+        <label for="prepago_no">No</label><br><br>
+
+        <!-- Lista Desplegable con Compañías de Teléfono -->
+        <label for="compania">Seleccione su compañía telefónica:</label>
+        <select id="compania" name="compania" required>
+            <option value="compania1">Compañía 1</option>
+            <option value="compania2">Compañía 2</option>
+            <option value="compania3">Compañía 3</option>
+            <option value="compania4">Compañía 4</option>
+            <option value="compania5">Compañía 5</option>
+        </select>
+        <br><br>
+
+        <!-- Área de Texto para Observaciones -->
+        <label for="observaciones">Observaciones (máximo 140 caracteres):</label><br>
+        <textarea id="observaciones" name="observaciones" maxlength="140" rows="4" cols="50" placeholder="Ingrese sus observaciones aquí..."></textarea>
+        <br><br>
+
+        <!-- Botón de Envío -->
+        <button type="submit">Enviar formulario</button>
+    </form>
+
+</body>
+</html>

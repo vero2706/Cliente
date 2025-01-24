@@ -1,0 +1,73 @@
+<!--Continuando con el ejercicio 1, añade a la tabla:
+  
+a. Dos nuevas columnas.  
+b. La primera de ellas incluirá, en cada fila, un campo numérico para introducir datos.  
+c. La segunda incluirá dos botones: Ingresar y Sacar.  
+d. Al pulsar Ingresar aumentará el saldo de ese producto en tanto dinero como cantidad 
+se haya incluido en el input.  
+e. Al pulsar Sacar disminuirá el saldo de ese producto en tanto dinero como cantidad se 
+haya incluido en el input.  
+f. 
+Cuando el saldo de un producto sea 0 o menos, se desactivará el botón de Sacar. Éste 
+se activará de nuevo cuando el saldo sea 1 o mas(esto se hará con la directiva v-bind y 
+el atributo correspondiente).-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./scripts/main.js"></script>
+    <link rel="stylesheet" href="./style/estilos.css" />
+</head>
+<body>
+    <header>
+        <h1>INFORMACIÓN BANCARIA</h1>
+    </header>
+    <main id="app">
+        <div id="datosPersonales" class="estiloContenedores">
+            <p> Nombre: {{nombre}}</p>
+            <p> Apellidos: {{apellidos}}</p>
+            <p> Dirección: {{direccion}}</p>
+            <p v-if="mostrarTelefono"> Teléfono: {{telefono}}</p>
+            <p> Estado civil: {{estadoCivil}}</p>
+        </div>
+        <div id="productos" class="estiloContenedores">
+            <table v-if=" productos.length > 1">
+                <tr>
+                    <th>Id</th>
+                    <th>Producto</th>
+                    <th>Saldo disponible</th>
+                </tr>
+                <tr v-for="(producto,index) in productos" ::key="index">
+                    <td>{{producto.id}}</td>
+                    <td>{{producto.nombre}}</td>
+                    <td>{{producto.saldo}}</td>
+                    <td><input type="number" v-model="producto.saldoParaAnadir"></td>
+                    <td>
+                        <input type="button" value="Ingresar" @click="ingresar(index)">
+                        <input type="button" value="Sacar" @click="sacar(index)" :disabled="producto.noHaySaldo">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="datosSucursal" class="estiloContenedores">
+            <p>Datos de la entidad: Santander</p>
+            <p>Dirección de la sucursal: Paseo del rollo 45</p>
+            <p>Teléfono de contacto: 923561342</p>
+            <p>Horario de atención al público:</p>
+            <ul>
+                <li>Lunes-Miércoles: 8:00-14:00</li>
+                <li>Jueves: 8:00-19:00</li>
+                <li>Viernes: 8:00-14:00</li>
+                <li>Sábado y domingo: Cerrado</li>
+            </ul>
+        </div>
+    </main>
+</body>
+<script>
+    app.mount("#app");
+</script>
+</html>

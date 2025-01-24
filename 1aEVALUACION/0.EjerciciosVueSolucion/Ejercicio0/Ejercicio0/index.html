@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title> v-bind </title>
+    <link rel="stylesheet" href="/Ejercicio0/Ejercicio0/estilos/estilos.css">
+    <script src="/Ejercicio0/Ejercicio0/scripts/main.js"></script>
+</head>
+
+<body>
+    <div id="app">
+    <!--p1: Mostrar nombre y apellidos utilizando interpolación:-->
+        <p id="p1">{{ nombre }} {{ apellidos }} </p>
+    <!--p2: Multiplicar la edad por 3:-->
+        <p id="p2" :style="divAlt">{{ multiplicarEdad(edad, 3) }} </p>
+    <!--p3: Número aleatorio generado por un método:-->
+        <p id="p3">{{ generarRandom() }} </p>
+
+    <!--div1: Imagen con v-bind:-->
+        <div id="div1">
+            <img :src="imagen" :alt="textoImagen">
+        </div>
+    <!--div2: Input con el valor inicial del nombre:-->
+        <div id="div2">
+           <input v-model="nombre">  
+        </div>
+
+    <!--div3: Menú dinámico con v-for:-->    
+        <div id="div3">
+            <ul>
+                <li v-for="(enlace, index) in enlaces" :key="index">
+                  <a :href="enlace.url">{{ enlace.texto }}</a>
+                </li>
+              </ul>
+        </div>
+    </div>
+    <script>
+        app.mount("#app");
+    </script>
+</body>
+
+</html>

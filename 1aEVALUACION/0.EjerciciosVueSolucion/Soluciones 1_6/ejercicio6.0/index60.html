@@ -1,0 +1,104 @@
+<!--6. Vas a desarrollar una página web, para la gestión de los libros incluidos en el catálogo de una 
+biblioteca, con el aspecto de la imagen incluida tras los siguientes puntos. Como se ve, la 
+página tendrá tres secciones: 
+a. Un formulario para incluir, en el catálogo, nuevos libros. 
+  . Si ya hubiera un libro con ese nombre y ese autor, no se almacenaría uno 
+    nuevo, sino que se aumentaría únicamente el número de ejemplares. 
+  . Si no se introduce alguno de los datos, no se podrán almacenar los datos del 
+    libro. 
+b. Una sección paralela al formulario que mostrará el total de ejemplares disponibles 
+para préstamo (sin tener en cuenta de que libro es). 
+Estos valores deberán recalcularse cada vez que se preste o devuelva un libro o 
+cada vez que cambie el número de libros almacenados. 
+c. Una tercera sección, por debajo de las otras dos, donde se irán mostrando los libros 
+que hay en el catálogo. Además, por cada libro, se incluirá un botón para prestar un 
+ejemplar del mismo o para hacer una devolución: 
+    . Cuando el usuario pulse el botón prestar de un libro, tendrá que disminuir el 
+        número de ejemplares disponibles del mismo y el total de libros disponibles. 
+    . Cuando el usuario pulse el botón devolver de un libro, tendrá que aumentar el 
+        número de ejemplares disponibles del mismo y el total de libros disponibles. 
+    . El botón Prestar de cada libro solo estará habilitado si hay ejemplares 
+        disponibles para préstamo. E, igualmente, el botón Devolver de cada libro 
+        solo estará habilitado si hay algún ejemplar prestado. 
+    . No podrán prestarse o devolverse más ejemplares de libros de los que estén 
+        registrados en el sistema. -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./scripts/main60.js"></script>
+    <link rel="stylesheet" href="./style/estilos60.css" />
+    <title>Catálogo Biblioteca</title>
+  </head>
+
+  <!-- Estructura HTML
+        La página tendrá tres secciones:
+        
+        >Formulario para añadir libros al catálogo.
+        >Resumen de ejemplares y promedio.
+        >Listado de libros con opciones para prestar y devolver.-->
+  <body>
+    <div id="app">
+      <!-- Formulario para agregar libros 
+            título
+            autor
+            Género
+            Ejemplares disponibles
+            Botón: Agregar libro -->
+      <div class="formulario">
+        <h2>Catálogo de Libros</h2>
+        <input v-model="nuevoLibro.titulo" placeholder="Título" />
+        <input v-model="nuevoLibro.autor" placeholder="Autor" />
+        <input v-model="nuevoLibro.género" placeholder="Género" /><input
+          type="number"
+          v-model.number="nuevoLibro.ejemplares"
+          placeholder="Ejemplares disponibles:"
+          min="1"
+        />
+        <button @click="agregarLibro">Agregar Libro</button>
+        <!--Mensaje en caso de error-->
+        <p v-if="error" class="error">{{ error }}</p>
+      </div>
+
+      <!-- Resumen de ejemplares 
+            . Total de Libros Disponibles:
+            . Promedio de Ejemplares por libro: -->
+      <div class="resumen">
+        <p>Total de Libros Disponibles: {{ totalEjemplares }}</p>
+        <p>Promedio de Ejemplares por libro: {{ mediaEjemplares }}</p>
+      </div>
+
+      <!-- Lista de libros -->
+      <div class="catalogo">
+        <table>
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Autor</th>
+              <th>Ejemplares Disponibles:</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(libro, index) in libros" :key="index">
+              <td>{{ libro.titulo }}</td>
+              <td>{{ libro.autor }}</td>
+              <td>{{ libro.ejemplares }}</td>
+              <td>
+                <button @click="prestarLibro(index)"
+                  :disabled="libro.ejemplares <= 0">Prestar</button>
+                <button @click="devolverLibro(index)"
+                  :disabled="libro.ejemplares >= libro.totalRegistrado">Devolver</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script>
+      app.mount("#app");
+    </script>
+  </body>
+</html>

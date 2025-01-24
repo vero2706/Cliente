@@ -1,0 +1,39 @@
+<!--Desarrollo de una Aplicación Pomodoro en Vue.js
+La aplicación consistirá en un temporizador para la técnica Pomodoro,
+ gestionando estados como trabajo y descanso, 
+ y con controles para pausar, re/iniciar y parar la cuenta regresiva.-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 5</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./scripts/main.js"></script>
+    <link rel="stylesheet" href="./style/estilos.css" />
+  </head>
+
+  <!-- Título: Técnica de estudio: POMODORO
+          contador: 45:00
+          Estado del contador: ""
+          Re/Iniciar  Pausar  Parar-->
+  <body>
+    <div id="app">
+        <h1>Técnica de estudio: POMODORO</h1>
+        <p>Contador: {{minutosCalculado}}:{{segundosCalculado}}</p>
+        <p>Estado del contador : {{estadoContador}} </p>
+    <!--Controles:-->      
+        <button @click="iniciar">Re/Iniciar</button>
+        <button @click="pausar">Pausar</button>
+        <button @click="parar">Parar</button>
+  <!-- c. Mientras que el contador no llegue a 00:00, se mostrará el siguiente mensaje: Deberías trabajar
+       d. Una vez se alcance el valor 00:00, comenzará la cuenta atrás del tiempo de descanso, 
+          mostrándose el mensaje: Deberías descansar-->
+        <p id="avisoAccion" v-show="verEstadoContador">Deberías {{accionARealizar}}</p>
+    </div>
+  </body>
+  <script>
+    app.mount("#app");
+  </script>
+</html>

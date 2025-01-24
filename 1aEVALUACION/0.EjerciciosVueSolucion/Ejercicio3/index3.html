@@ -1,0 +1,60 @@
+<!--Crea una página web para poder crear una lista de propósitos de año nuevo. 
+Debe cumplir con los siguientes requisitos: 
+➢ Por cada propósito habrá elemento de tipo checkbox y un texto.  
+➢ Cada checkbox estará enlazado con su propiedad “hecho”.  
+➢ el input se enlazará con una variable, en el ejemplo anterior llamada nuevoProp. De 
+ahí se sacará el valor para incluirlo en el array de propósitos cuando sea necesario. -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="scripts/scripts3.js"></script>
+    <link rel="stylesheet" href="./estilos/estilos3.css">
+</head>
+
+<body>
+    <div id="app">
+      <!--➢ Habrá un título inicial con el texto “Propósitos de año nuevo: “  -->
+      <h1>Propósitos de año nuevo:</h1>
+
+      <!--➢ Se incluirá una lista no numerada de propósitos de año nuevo 
+      que solo se mostrará si hay al menos un propósito registrado. 
+      En caso contrario se mostrará el texto 
+      “La lista de propósitos está vacía” -->
+      <div v-if="propositos.length"></div>
+      <!--➢ Tendrá un checkbox para cada propósito (se podrá marcar/desmarcar 
+              para cambiar su estado) 
+          ➢ Al hacer doble click en un propósito debe borrarse de la lista.  -->
+
+        <ul>
+            <li v-for="(prop, index) in propositos" :key="index" 
+            @dblclick="borrarProposito(index)">
+              <input type="checkbox" v-model="prop.hecho">
+
+      <!--➢ El texto del propósito aparecerá tachado si ya se ha llevado a cabo (si está 
+            seleccionado el check). **Mira el elemento HMTL "del"  -->
+              <del v-if="prop.hecho" >{{ prop.texto }}</del>
+              <span v-else>{{ prop.texto }}</span>
+            </li>
+        </ul>
+        <p v-else>La lista de propósitos está vacía</p>
+        <!--➢ Habrá, también, un input con un botón para añadir un nuevo propósito a la lista. Sólo 
+                se añade si se ha introducido texto. -->
+        <input v-model="nuevoProp">
+        <button @click="anadirProposito">Añadir</button>
+        <br>
+        <!--➢ Por último, se incluirá un botón que borrará toda la lista de propósitos tras pedir 
+                confirmación al usuario. -->
+        <button @click="borrarLista">Borrar todos</button>
+      </div>
+    </div>
+    <script>
+        app.mount("#app");
+    </script>
+</body>
+
+</html>

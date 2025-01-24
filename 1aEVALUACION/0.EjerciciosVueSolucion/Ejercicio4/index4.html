@@ -1,0 +1,55 @@
+<!--➢ Al título inicial se le aplicarán los siguientes estilos:  
+o Cuando haya más de 3 propósitos cumplidos en la lista, los estilos indicados en 
+el tercer punto.  
+o Cuando hay mas de 5 propósitos cumplidos en la lista, los estilos indicados en 
+el cuarto punto.  
+o En cualquier otro caso, ningún estilo.-->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="scripts/scripts4.js"></script>
+    <link rel="stylesheet" href="./estilos/estilos4.css">
+</head>
+
+<body>
+    <div id="app">
+      <!--Aqui la clase "estilosEncabezado"-->
+        <h2 :class="estilosEncabezado">Propósitos de año nuevo:</h2>
+        <ul v-if="propositos.length">
+      <!--➢ A cada uno de los propósitos, se aplicarán:  
+              o Si está cumplido, estilo1.  
+              o En caso contrario, estilo2.  -->
+            <li v-for="(prop,index) in propositos" :class="prop.hecho ? 'estilo1' : 'estilo2'" @dblclick="borrarProposito(index)">
+              <label>
+              <input type="checkbox"
+                v-model="prop.hecho" @change="actualizarEstilosEncabezado()">
+      
+              <del v-if="prop.hecho" >
+                {{ prop.texto }}
+              </del>
+              <span v-else>
+                {{ prop.texto }}
+              </span>
+            </label>
+            </li>
+        </ul>
+        <p v-else>
+            La lista de propósitos está vacía
+        </p>
+        <input v-model="nuevoProp">
+        <button @click="anadirProposito">Añadir</button>
+        <br>
+        <button @click="borrarPropositos">Borrar todos</button>
+    </div>
+    <script>
+        app.mount("#app");
+    </script>
+</body>
+
+</html>

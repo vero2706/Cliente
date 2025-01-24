@@ -1,0 +1,76 @@
+<!--Crea una página web dinámica que muestre la información de un cliente de un banco. Los 
+datos mostrados tendrán que cumplir con lo siguiente:
+
+a. Los datos personales se muestran todos en elementos de tipo párrafo, salvo el 
+teléfono que solo se mostrará en caso de ser un valor diferente a null o a 0. 
+
+b. Los datos de los productos se mostrarán en un tabla, y solo en caso de haber mas de 1 
+producto registrado.  
+
+c. Los datos de la sucursal bancaria no están almacenados en ningún sitio, se incluirán 
+directamente en el documento html.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./scripts/main.js"></script>
+    <link rel="stylesheet" href="./style/estilos.css" />
+</head>
+<body>
+    <header>
+        <h1>INFORMACIÓN BANCARIA</h1>
+    </header>
+    <main id="app">
+
+    <!--a. Los datos personales se muestran todos en elementos de tipo párrafo, salvo el 
+teléfono que solo se mostrará en caso de ser un valor diferente a null o a 0. -->
+        <div id="datosPersonales" class="estiloContenedores">
+            <p> Nombre: {{nombre}}</p>
+            <p> Apellidos: {{apellidos}}</p>
+            <p> Dirección: {{direccion}}</p>
+            <p v-if="telefono != 0 && telefono != null"> Teléfono: {{telefono}}</p>
+            <p> Estado civil: {{estadoCivil}}</p>
+        </div>
+
+    <!--b. Los datos de los productos se mostrarán en un tabla, y solo en caso de haber mas de 1 
+producto registrado.-->
+        <div id="productos" class="estiloContenedores">
+            <table v-if=" productos.length > 1">
+                <tr>
+                    <th>Id</th>
+                    <th>Producto</th>
+                    <th>Saldo disponible</th>
+                </tr>
+                <tr v-for="(producto,index) in productos" ::key="index">
+                    <td>{{producto.id}}</td>
+                    <td>{{producto.nombre}}</td>
+                    <td>{{producto.saldo}}</td>
+                </tr>
+            </table>
+        </div>
+    <!--c. Los datos de la sucursal bancaria no están almacenados en ningún sitio, se incluirán 
+directamente en el documento html-->
+    
+        <div id="datosSucursal" class="estiloContenedores">
+            <p>Datos de la entidad: Santander</p>
+            <p>Dirección de la sucursal: Paseo del rollo 45</p>
+            <p>Teléfono de contacto: 923561342</p>
+            <p>Horario de atención al público:</p>
+            <ul>
+                <li>Lunes-Miércoles: 8:00-14:00</li>
+                <li>Jueves: 8:00-19:00</li>
+                <li>Viernes: 8:00-14:00</li>
+                <li>Sábado y domingo: Cerrado</li>
+            </ul>
+        </div>
+    </main>
+</body>
+<script>
+    app.mount("#app");
+</script>
+</html>

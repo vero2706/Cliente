@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./scripts/main.js"></script>
+    <link rel="stylesheet" href="./style/valoraciones.css">
+    <title>Evaluación de Campañas Publicitarias</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Valoración de Campañas Publicitarias</h1>
+        <form>
+            <label for="campaniaSeleccionada">Seleccione o introduzca el nombre de la campaña:</label>
+                <select v-model="campaniaSeleccionada">
+                    <option v-for="campannia in valoracionesCampanias" :key="campannia.id" :value="campannia.id">{{ campannia.campania }}</option>
+                </select> 
+            
+
+            <label for="nuevaCampania">Nueva campaña:</label>
+            <input type="text" v-model="nuevaCampania" placeholder="Indique Campaña">
+
+            <label for="claridadMensaje">Claridad del mensaje (1-10):</label>
+            <input type="number" v-model= "claridad" min="1" max="10" placeholder="Indique claridad del mensaje" required>
+
+            <label for="medioSeleccionado">Medio principal:</label>
+            <label><input type="radio" id="medioTradicional" value="1" v-model="medio" > Medios Tradicionales</label>
+            <label><input type="radio" id="medioOnline" value="2" v-model="medio" > Medios Online</label>
+
+            <label for="checkboxRating">Percepciones del usuario:</label>
+            <label><input type="checkbox" value="1" v-model="percepciones" > Alineación con la marca</label>
+            <label><input type="checkbox" value="2" v-model="percepciones"> Credibilidad y Confianza</label>
+            <label><input type="checkbox" value="3" v-model="percepciones"> Atractivo Visual</label>
+
+            <button type="submit" :disabled="!campaniaSeleccionada && !nuevaCampania">Valorar campaña</button>
+            
+        </form>
+
+        <div>
+            <h2>Tabla de Valoraciones</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre de la Campaña</th>
+                        <th>Media Claridad del Mensaje</th>
+                        <th>Medio Principal</th>
+                        <th>Percepción Más Repetida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="campannia in valoracionesCampanias" :key="campannia.id">
+                        <td>{{ campannia.nombre }}</td>
+                        <td>{{ calcularMediaClaridad(campannia.valoraciones) }}</td>
+                        <td>{{ calcularMedioMasSeleccionado(campannia.valoraciones) }}</td>
+                        <td>{{ calcularPercepcionMasRepetida(campannia.valoraciones) }}</td>
+                    </tr> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

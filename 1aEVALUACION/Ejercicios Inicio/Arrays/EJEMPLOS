@@ -1,0 +1,88 @@
+//EJEMPLO MAP
+/*Resultado: map() crea un nuevo array con la primera letra de cada palabra convertida a mayúscula.*/
+
+let arrayPalabras = ["casa", "abedul", "coche", "rio", "alameda", "alegría", "portón"];
+
+let arrayMayus = arrayPalabras.map(palabra => palabra[0].toUpperCase() + palabra.slice(1));
+console.log("Palabras con inicial en mayúsculas:", arrayMayus);
+
+//EJEMPLO REDUCE
+//Resultado: reduce() concatena todas las palabras del array en una sola cadena.
+
+let cadenaUnica = arrayPalabras.reduce((valorAnt, valorAct) => valorAnt + valorAct);
+console.log("Concatenación de todas las palabras:", cadenaUnica);
+
+let cadenaUnica2 = arrayPalabras.reduce((valorAnt, valorAct) => valorAnt + valorAct, "Concatenados: ");
+console.log("Cadena con prefijo:", cadenaUnica2);
+
+/*EJEMPLO forEach()
+El método forEach() ejecuta una función para cada elemento de un array. 
+A diferencia de otros métodos de arrays como map o filter, 
+forEach() no devuelve un nuevo array, simplemente recorre los elementos 
+y permite realizar acciones sobre ellos.*/
+
+let arrayPalabra = ["casa", "abedul", "coche", "rio", "alameda", "alegría", "portón"];
+
+arrayPalabra.forEach((elemento, i, arrayPalabra) => { 
+    arrayPalabra[i] = elemento + "!!";  // Modificamos el contenido del array
+    console.log("Valor en la posición " + i + ": " + elemento);
+});
+
+console.log("Array después de forEach:", arrayPalabra);
+/*Resultado:
+Se modifican todos los elementos del array añadiendo "!!" al final.
+Cada valor del array original se muestra por consola con su índice.
+SALIDA:
+Array después de forEach: ["casa!!", "abedul!!", "coche!!", "rio!!", "alameda!!", "alegría!!", "portón!!"]*/
+
+
+
+/*EJEMPLO includes()
+El método includes() comprueba si un array contiene un valor específico. 
+Devuelve true si lo encuentra y false si no.*/
+
+let arrayPalabrs = ["casa", "abedul", "coche", "rio", "alameda", "alegría", "portón"];
+let palabra = "Estetoscopio";
+
+// Comprobamos si el array contiene la palabra "casa"
+let existe = arrayPalabrs.includes("casa");
+console.log("¿El array contiene 'casa'? " + existe);
+
+// Comprobamos si la cadena "Estetoscopio" contiene la letra "u"
+let existe2 = palabra.includes("u");
+console.log("¿La palabra 'Estetoscopio' contiene la letra 'u'? " + existe2);
+
+/*Resultado:
+includes() en el array de palabras devuelve true porque "casa" está presente.
+includes() en la cadena de texto "Estetoscopio" devuelve true porque la letra "u" está presente.
+SALIDA:
+¿El array contiene 'casa'? true
+¿La palabra 'Estetoscopio' contiene la letra 'u'? true*/
+
+
+/*EJEMPLO Array.from()
+
+El método Array.from() permite crear un nuevo array a partir de un objeto iterable,
+ como una cadena de texto.*/
+
+ let palabr = "Estetoscopio";
+
+// Creamos un array a partir de la cadena de texto, donde cada letra será un elemento del array
+let arrayNuevo = Array.from(palabr);
+console.log("Array creado desde la palabra 'Estetoscopio':", arrayNuevo);
+
+/*Resultado:
+La cadena "Estetoscopio" se convierte en un array donde cada letra es un elemento.
+SALIDA:
+Array creado desde la palabra 'Estetoscopio': ["E", "s", "t", "e", "t", "o", "s", "c", "o", "p", "i", "o"]*/
+
+/*CONCLUSIÓN:
+
+forEach() se utiliza para ejecutar una función en cada elemento de un array. No devuelve nada,
+ pero puede modificar el array original.
+
+includes() verifica si un valor específico está presente en un array o en una cadena de texto.
+
+Array.from() convierte cualquier objeto iterable (como una cadena de texto) en un array.*/
+
+

@@ -1,0 +1,47 @@
+.galeria {
+  display: flex;
+  justify-content: center;
+}
+
+.galeria div {
+  text-align: center;
+}
+
+.galeria img {
+  width: 150px;
+  height: 100px;
+  margin: 15px;
+  border: 2px solid blue;
+  transition: border 0.3s ease;
+}
+
+.galeria img.borde-verde {
+  border-color: green;
+}
+
+.galeria img.borde-punteado {
+  border-style: dotted;
+}
+
+.divIntermedio {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.entradas {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.contadores {
+  flex: 1;
+}
+
+.entrada {
+  margin-bottom: 10px;
+}
+
+.divUrls {
+  margin-top: 20px;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="./estilos/estilos2.css">
+    <script src="./scripts/main2.js"></script>
+</head>
+
+<body>
+<!--➢ Crea una página web que contenga dos elementos div paralelos:
+
+o En el primer div, dependiendo del valor (v-if) de una propiedad “elemento”, se 
+mostrará:-->
+    <div id="app">
+        <div id="izquierda" class="general">
+
+        <!-- ▪ Cuando el valor sea “input”: un input.-->
+            <div v-if="elemento === 'input'">
+                <input type="text" placeholder="Escribe algo...">
+            </div>
+
+        <!-- ▪ Cuando el valor sea “texto”: un span con el texto incluido en la 
+        propiedad texto (el texto será “Esto es un span”).-->
+            <span v-if="elemento == 'texto'"> {{texto}}</span>
+
+        <!-- ▪ Cuando el valor sea “tabla”: una tabla con una fila y dos columnas.-->
+            <table v-if="elemento == 'tabla'">
+                <tr>
+                    <th>Columna 1</th>
+                    <th>Columna 2</th>
+                </tr>
+            </table>
+        </div>
+        
+
+<!-- o En el segundo contenedor div, a partir de un array con datos de personas, 
+se creará una tabla con tres columnas que solo se mostrará si hay algún 
+dato que mostrar: -->
+        <div id="derecha" class="general">
+            
+    <!-- ▪ En la primera columna se mostrará el dni de cada persona. 
+         ▪ En la segunda el nombre.
+         ▪ En la tercera los apellidos.-->
+            <table v-if="personas.length > 0">
+                <tr>
+                    <th>DNI</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                </tr>
+                <tr v-for="(persona, index) in personas" :key="persona.dni">
+                    <td>{{persona.dni}}</td>
+                    <td>{{persona.nombre}}</td>
+                    <td>{{persona.apellidos}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        app.mount("#app");
+    </script>
+</body>
+
+</html>
