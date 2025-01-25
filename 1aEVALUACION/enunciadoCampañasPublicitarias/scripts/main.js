@@ -48,6 +48,7 @@ const app = Vue.createApp({
           campania: this.nuevaCampania,
           valoraciones: [nuevaValoracion],
         });
+        this.campaniaSeleccionada = nuevaId;
         this.nuevaCampania = "";
       } else {
         const campaña = this.valoracionesCampanias.find(
@@ -82,6 +83,7 @@ const app = Vue.createApp({
       return Object.keys(frecuencia).reduce((a, b) =>
         frecuencia[a] > frecuencia[b] ? a : b
       );
+      return percepcionMasRepetida;
     },
   },
 });

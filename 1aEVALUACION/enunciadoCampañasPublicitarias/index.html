@@ -11,7 +11,7 @@
 <body>
     <div id="app">
         <h1>Valoración de Campañas Publicitarias</h1>
-        <form>
+        <form @submit.prevent="valorarCampania">
             <label for="campaniaSeleccionada">Seleccione o introduzca el nombre de la campaña:</label>
                 <select v-model="campaniaSeleccionada">
                     <option v-for="campannia in valoracionesCampanias" :key="campannia.id" :value="campannia.id">{{ campannia.campania }}</option>
