@@ -1,4 +1,4 @@
-# grupo-bici
+# ejercicio
 
 ## Project setup
 ```
